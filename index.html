@@ -91,8 +91,9 @@
             padding: 0 15px 20px;
         }
 
-        /* Secciones nuevas */
+        /* Secciones ocultas */
         section {
+            display: none; /* Ocultamos las secciones por defecto */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -101,6 +102,10 @@
             border-top: 2px solid #8a2be2;
             color: #8a2be2;
             font-size: 2rem;
+        }
+
+        section.active {
+            display: flex; /* Mostramos la sección cuando tiene la clase "active" */
         }
 
         /* Pie de página */
@@ -125,43 +130,29 @@
 <body>
     <header>
         <h1>Genesis Terminal</h1>
-        <nav>
-            <a href="#tv">
-                <img src="https://i.imgur.com/tUtNGdZ.jpeg" alt="Icono rebirth">
-            </a>
-            <a href="#desk">
-                <img src="https://i.imgur.com/3pFjzX9.png" alt="Icono new act">
-            </a>
-        </nav>
     </header>
 
     <main>
         <div class="container">
             <!-- Card 1 -->
-            <div class="card">
-                <a href="#limbo">
-                    <img src="https://i.imgur.com/N3NPAd1.png" alt="Nueva imagen en limbo">
-                    <h2>Limbo</h2>
-                    <p>El sofá es el centro de relajación en la habitación, donde todo comienza.</p>
-                </a>
+            <div class="card" onclick="showSection('limbo')">
+                <img src="https://i.imgur.com/N3NPAd1.png" alt="Nueva imagen en limbo">
+                <h2>Limbo</h2>
+                <p>El sofá es el centro de relajación en la habitación, donde todo comienza.</p>
             </div>
 
             <!-- Card 2 -->
-            <div class="card">
-                <a href="#rebirth">
-                    <img src="https://i.imgur.com/LmcNOab.png" alt="Nueva imagen central">
-                    <h2>Rebirth</h2>
-                    <p>La televisión siempre muestra contenido interesante, como análisis cripto y más.</p>
-                </a>
+            <div class="card" onclick="showSection('rebirth')">
+                <img src="https://i.imgur.com/LmcNOab.png" alt="Nueva imagen central">
+                <h2>Rebirth</h2>
+                <p>La televisión siempre muestra contenido interesante, como análisis cripto y más.</p>
             </div>
 
             <!-- Card 3 -->
-            <div class="card">
-                <a href="#newact">
-                    <img src="https://i.imgur.com/Pw7gvDS.png" alt="Nueva imagen en escritorio">
-                    <h2>New Act</h2>
-                    <p>El lugar donde las estrategias y gráficos cripto cobran vida.</p>
-                </a>
+            <div class="card" onclick="showSection('newact')">
+                <img src="https://i.imgur.com/Pw7gvDS.png" alt="Nueva imagen en escritorio">
+                <h2>New Act</h2>
+                <p>El lugar donde las estrategias y gráficos cripto cobran vida.</p>
             </div>
         </div>
     </main>
@@ -184,5 +175,17 @@
     <footer>
         <p>Diseño inspirado en la habitación cripto. © 2024 | <a href="#header">Volver arriba</a></p>
     </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Mostrar la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+        }
+    </script>
 </body>
 </html>
