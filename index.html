@@ -91,6 +91,18 @@
             padding: 0 15px 20px;
         }
 
+        /* Secciones nuevas */
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a1a;
+            border-top: 2px solid #8a2be2;
+            color: #8a2be2;
+            font-size: 2rem;
+        }
+
         /* Pie de página */
         footer {
             background: #1a1a1a;
@@ -126,27 +138,48 @@
     <main>
         <div class="container">
             <!-- Card 1 -->
-            <div class="card" id="sofa">
-                <img src="https://i.imgur.com/N3NPAd1.png" alt="Nueva imagen en limbo">
-                <h2>Limbo</h2>
-                <p>El sofá es el centro de relajación en la habitación, donde todo comienza.</p>
+            <div class="card">
+                <a href="#limbo">
+                    <img src="https://i.imgur.com/N3NPAd1.png" alt="Nueva imagen en limbo">
+                    <h2>Limbo</h2>
+                    <p>El sofá es el centro de relajación en la habitación, donde todo comienza.</p>
+                </a>
             </div>
 
             <!-- Card 2 -->
-            <div class="card" id="tv">
-                <img src="https://i.imgur.com/LmcNOab.png" alt="Nueva imagen central">
-                <h2>Rebirth</h2>
-                <p>La televisión siempre muestra contenido interesante, como análisis cripto y más.</p>
+            <div class="card">
+                <a href="#rebirth">
+                    <img src="https://i.imgur.com/LmcNOab.png" alt="Nueva imagen central">
+                    <h2>Rebirth</h2>
+                    <p>La televisión siempre muestra contenido interesante, como análisis cripto y más.</p>
+                </a>
             </div>
 
             <!-- Card 3 -->
-            <div class="card" id="desk">
-                <img src="https://i.imgur.com/Pw7gvDS.png" alt="Nueva imagen en escritorio">
-                <h2>New Act</h2>
-                <p>El lugar donde las estrategias y gráficos cripto cobran vida.</p>
+            <div class="card">
+                <a href="#newact">
+                    <img src="https://i.imgur.com/Pw7gvDS.png" alt="Nueva imagen en escritorio">
+                    <h2>New Act</h2>
+                    <p>El lugar donde las estrategias y gráficos cripto cobran vida.</p>
+                </a>
             </div>
         </div>
     </main>
+
+    <!-- Sección Limbo -->
+    <section id="limbo">
+        <p>Sección Limbo (vacía por ahora)</p>
+    </section>
+
+    <!-- Sección Rebirth -->
+    <section id="rebirth">
+        <p>Sección Rebirth (vacía por ahora)</p>
+    </section>
+
+    <!-- Sección New Act -->
+    <section id="newact">
+        <p>Sección New Act (vacía por ahora)</p>
+    </section>
 
     <footer>
         <p>Diseño inspirado en la habitación cripto. © 2024 | <a href="#header">Volver arriba</a></p>
