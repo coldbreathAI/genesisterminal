@@ -32,25 +32,6 @@
             text-shadow: 0 0 5px rgba(138, 43, 226, 0.7);
         }
 
-        nav {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        nav a img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        nav a img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
-        }
-
         /* Contenedor principal */
         .container {
             display: grid;
@@ -67,6 +48,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
         .card:hover {
@@ -89,23 +71,6 @@
             color: #e0e0e0;
             font-size: 1rem;
             padding: 0 15px 20px;
-        }
-
-        /* Secciones ocultas */
-        section {
-            display: none; /* Ocultamos las secciones por defecto */
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #1a1a1a;
-            border-top: 2px solid #8a2be2;
-            color: #8a2be2;
-            font-size: 2rem;
-        }
-
-        section.active {
-            display: flex; /* Mostramos la sección cuando tiene la clase "active" */
         }
 
         /* Pie de página */
@@ -157,34 +122,37 @@
         </div>
     </main>
 
-    <!-- Sección Limbo -->
-    <section id="limbo">
-        <p>Sección Limbo (vacía por ahora)</p>
-    </section>
-
-    <!-- Sección Rebirth -->
-    <section id="rebirth">
-        <p>Sección Rebirth (vacía por ahora)</p>
-    </section>
-
-    <!-- Sección New Act -->
-    <section id="newact">
-        <p>Sección New Act (vacía por ahora)</p>
-    </section>
-
     <footer>
         <p>Diseño inspirado en la habitación cripto. © 2024 | <a href="#header">Volver arriba</a></p>
     </footer>
 
     <script>
         function showSection(sectionId) {
-            // Ocultar todas las secciones
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => section.classList.remove('active'));
+            // Ocultar la página principal
+            document.querySelector('main').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
 
-            // Mostrar la sección seleccionada
-            const selectedSection = document.getElementById(sectionId);
-            selectedSection.classList.add('active');
+            // Crear la sección si no existe
+            let section = document.getElementById(sectionId);
+            if (!section) {
+                section = document.createElement('section');
+                section.id = sectionId;
+                section.style.height = '100vh';
+                section.style.display = 'flex';
+                section.style.justifyContent = 'center';
+                section.style.alignItems = 'center';
+                section.style.background = '#1a1a1a';
+                section.style.color = '#8a2be2';
+                section.style.fontSize = '2rem';
+                section.style.borderTop = '2px solid #8a2be2';
+
+                // Contenido placeholder
+                section.innerHTML = `<p>Sección ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)} (vacía por ahora)</p>`;
+                document.body.appendChild(section);
+            }
+
+            // Mostrar la sección
+            section.style.display = 'flex';
         }
     </script>
 </body>
