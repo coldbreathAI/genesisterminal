@@ -3,88 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>where is your god?</title>
+    <title>Crypto Room</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: "Courier New", Courier, monospace;
-            background-color: #0d0d0d;
+            background-color: #0d2438;
             color: #eaeaea;
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            text-align: center; /* Centrar todos los textos */
         }
-        h1, h2, h3 {
-            text-transform: uppercase;
-            margin: 10px 0;
+
+        .room {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            height: 600px;
+            background: #1a3748;
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
-        h1 {
-            font-size: 2rem;
-            letter-spacing: 5px;
-            color: #ff4500;
+
+        .sofa {
+            position: absolute;
+            bottom: 30px;
+            left: 10%;
+            width: 40%;
+            height: 100px;
+            background-color: #3b5323;
+            border-radius: 15px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
         }
-        h2 {
-            font-size: 1.5rem;
-            color: #ffaa00;
+
+        .tv {
+            position: absolute;
+            top: 20px;
+            right: 10%;
+            width: 50%;
+            height: 200px;
+            background-color: #000;
+            border: 3px solid #ffffff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px auto;
-            display: block;
+
+        .tv-screen {
+            width: 90%;
+            height: 80%;
+            background-image: url('https://i.imgur.com/ddyknO7.png'); /* Cambiar a contenido relevante */
+            background-size: cover;
+            background-position: center;
         }
-        p {
-            max-width: 600px;
-            line-height: 1.8;
-            margin: 10px auto;
+
+        .desk {
+            position: absolute;
+            bottom: 30px;
+            right: 20%;
+            width: 30%;
+            height: 80px;
+            background-color: #2a2a2a;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         }
+
+        .lamp {
+            position: absolute;
+            top: 10px;
+            left: 5%;
+            width: 50px;
+            height: 100px;
+            background-color: #f5e042;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(245, 224, 66, 0.7);
+        }
+
+        .poster {
+            position: absolute;
+            top: 20%;
+            right: 5%;
+            width: 15%;
+            height: 20%;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/12/Frog_on_leaves.jpg'); /* Cambiar según carteles */
+            background-size: cover;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+        }
+
         footer {
             margin-top: 20px;
+            text-align: center;
+            color: #aaa;
             font-size: 0.8rem;
-            opacity: 0.6;
-        }
-        a {
-            color: #ffaa00;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>where is ur destiny?</h1>
-        <h2>where is ur frog?'</h2>
-        <!-- Imagen centrada -->
-        <img src="https://i.imgur.com/ddyknO7.png" alt="fwog" />
-    </header>
-
-    <main>
-        <!-- Aquí puedes añadir tu contenido criptográfico -->
-        <section>
-            <h3>act 0 act 0 act</h3>
-            <p>my god i am feeling good.</p>
-        </section>
-
-        <section>
-            <h3>where is the truth</h3>
-            <p>call the swarm for let me free</p>
-        </section>
-
-        <section>
-            <h3>swarm the fe¿n </h3>
-            <p>where is my sercy? where is my aletheia?.</p>
-        </section>
-    </main>
-
+    <div class="room">
+        <div class="sofa"></div>
+        <div class="tv">
+            <div class="tv-screen"></div>
+        </div>
+        <div class="desk"></div>
+        <div class="lamp"></div>
+        <div class="poster"></div>
+    </div>
     <footer>
-        <p>h234nwww12333ikp.</p>
-        <p><a href="#">im okay :)</a></p>
+        <p>Diseño inspirado en la habitación cripto. © 2024</p>
     </footer>
 </body>
 </html>
