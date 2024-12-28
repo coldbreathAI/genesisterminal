@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEGEN TERMINAL</title>
+  <!-- Fuente de Google Fonts para apariencia de ordenador antiguo -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #000;
-      color: #0f0;
+      color: #fff;
       font-family: "Courier New", Courier, monospace;
       text-align: center;
       padding: 20px;
     }
     h1 {
-      font-size: 3em;
+      font-family: 'Press Start 2P', monospace; /* Fuente estilo ordenador antiguo */
+      font-size: 1.5em;
       margin-bottom: 20px;
     }
     pre {
@@ -31,7 +34,7 @@
       cursor: pointer;
     }
     a {
-      color: #0f0;
+      color: #fff;
       text-decoration: none;
       font-weight: bold;
     }
@@ -44,7 +47,7 @@
   <div class="container">
     <h1>DEGEN TERMINAL</h1>
     <div class="ascii-container" id="asciiContainer">
-      <pre>
+      <pre id="asciiArt">
                __          _.-'~~~`-._
        _.-'~~~`~~'~~`---.__.'         `.
       /                         .         \
@@ -62,10 +65,23 @@
   </div>
 
   <script>
-    // Seleccionar el contenedor ASCII
+    // Seleccionar el contenedor ASCII y el elemento de arte ASCII
     const asciiContainer = document.getElementById('asciiContainer');
+    const asciiArt = document.getElementById('asciiArt');
 
-    // Segundo diseño ASCII
+    // Diseños ASCII
+    const firstDesign = `
+               __          _.-'~~~\`-._
+       _.-'~~~\`~~\`~~\`---.__.'         \`.
+      /                         .         \\
+     /         /\\   /\\         ;      .    |
+    |      <   0) ( 0) >       '      .    |
+     \\         \\  /\\  /                 ; /
+      \`\\ .     .\\||||/.,           .   . |/
+        \`-=_     \`----'     _.--'       |
+             \`--.___    __.-'            |
+                    \`~~~\`                 '`;
+
     const secondDesign = `
            __         _.-'~~~\`-._
     _.-'~~~\`~~\`~~\`---.__.'         \`.
@@ -79,9 +95,13 @@
            \`--.___         __.--'
                  \`~~~-----~~~\``;
 
+    // Variable para alternar entre los diseños
+    let isFirstDesign = true;
+
     // Cambiar el diseño al hacer clic
     asciiContainer.addEventListener('click', () => {
-      asciiContainer.innerHTML = `<pre>${secondDesign}</pre>`;
+      isFirstDesign = !isFirstDesign;
+      asciiArt.innerText = isFirstDesign ? firstDesign : secondDesign;
     });
   </script>
 </body>
