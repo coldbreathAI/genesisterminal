@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEGEN TERMINAL</title>
-  <!-- Fuente estilo terminal -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: black;
+      color: white;
       font-family: 'Press Start 2P', monospace;
       margin: 0;
       padding: 0;
@@ -76,24 +75,36 @@
       white-space: pre-wrap;
     }
 
-    /* Scrollbar styling */
-    .terminal::-webkit-scrollbar {
-      width: 6px;
+    canvas {
+      display: none;
+      background-color: black;
+      border: 2px solid green;
+      margin-top: 20px;
     }
 
-    .terminal::-webkit-scrollbar-thumb {
-      background: #0f0;
-      border-radius: 5px;
+    #playButton {
+      color: lime;
+      font-size: 20px;
+      cursor: pointer;
+      text-decoration: underline;
     }
 
-    .terminal::-webkit-scrollbar-track {
-      background: #000;
+    #playButton:hover {
+      color: white;
+    }
+
+    #welcomeScreen {
+      margin-bottom: 30px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div id="welcomeScreen">
     <h1>DEGEN TERMINAL</h1>
+    <p id="playButton">Play with the Whale</p>
+  </div>
+
+  <div class="container">
     <div class="ascii-container" id="asciiArt">
       <pre>
                __          _.-'~~~`-._
@@ -108,6 +119,7 @@
                     `~~~`                 '
       </pre>
     </div>
+
     <div class="terminal" id="terminal">
       <div class="output">Welcome to DEGEN TERMINAL</div>
       <div class="output">Type "help" for a list of commands.</div>
@@ -118,12 +130,17 @@
     </div>
   </div>
 
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+
   <script>
     const asciiArt = document.getElementById('asciiArt');
     const terminal = document.getElementById('terminal');
     const input = document.getElementById('terminalInput');
+    const playButton = document.getElementById('playButton');
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-    // Diseños ASCII
     const firstDesign = `
                __          _.-'~~~\`-._
        _.-'~~~\`~~\`~~\`---.__.'         \`.
@@ -151,8 +168,15 @@
 
     let isFirstDesign = true;
 
+    const gridSize = 20;
+    const tileCount = canvas.width / gridSize;
+    let snake = [{ x: 10, y: 10 }];
+    let direction = { x: 0, y: 0 };
+    let food = spawnFood();
+    let gameOver = false;
+
     const commands = {
-      help: 'Available commands: help, clear, switch',
+      help: 'Available commands: help, clear, switch, play',
       clear: () => {
         terminal.querySelectorAll('.output').forEach(el => el.remove());
         return '';
@@ -161,6 +185,12 @@
         isFirstDesign = !isFirstDesign;
         asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
         return 'ASCII design switched!';
+      },
+      play: () => {
+        welcomeScreen.style.display = 'none';
+        canvas.style.display = 'block';
+        gameLoop();
+        return 'Starting Snake Game...';
       },
     };
 
@@ -173,23 +203,88 @@
           commandOutput.textContent = `>_ ${value}`;
           terminal.insertBefore(commandOutput, input.parentElement);
 
-          let response;
-          if (commands[value]) {
-            response = typeof commands[value] === 'function' ? commands[value]() : commands[value];
-          } else {
-            response = `Unknown command: "${value}". Try 'help' for available commands.`;
-          }
+          let response = commands[value] ? commands[value]() : `Unknown command: "${value}". Try 'help'.`;
 
-          if (response) {
-            const responseOutput = document.createElement('div');
-            responseOutput.className = 'output';
-            responseOutput.textContent = response;
-            terminal.insertBefore(responseOutput, input.parentElement);
-          }
+          const responseOutput = document.createElement('div');
+          responseOutput.className = 'output';
+          responseOutput.textContent = response;
+          terminal.insertBefore(responseOutput, input.parentElement);
         }
         input.value = '';
         terminal.scrollTop = terminal.scrollHeight;
       }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case 'ArrowUp':
+          if (direction.y === 0) direction = { x: 0, y: -1 };
+          break;
+        case 'ArrowDown':
+          if (direction.y === 0) direction = { x: 0, y: 1 };
+          break;
+        case 'ArrowLeft':
+          if (direction.x === 0) direction = { x: -1, y: 0 };
+          break;
+        case 'ArrowRight':
+          if (direction.x === 0) direction = { x: 1, y: 0 };
+          break;
+      }
+    });
+
+    function spawnFood() {
+      return {
+        x: Math.floor(Math.random() * tileCount),
+        y: Math.floor(Math.random() * tileCount),
+      };
+    }
+
+    function drawSnake() {
+      snake.forEach((segment) => {
+        ctx.fillStyle = 'lime';
+        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
+      });
+    }
+
+    function updateSnake() {
+      const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+      if (
+        head.x < 0 ||
+        head.x >= tileCount ||
+        head.y < 0 ||
+        head.y >= tileCount ||
+        snake.some(segment => segment.x === head.x && segment.y === head.y)
+      ) {
+        gameOver = true;
+        alert('Game Over! Press F5 to restart.');
+      }
+
+      snake.unshift(head);
+
+      if (head.x === food.x && head.y === food.y) {
+        food = spawnFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+    function gameLoop() {
+      if (gameOver) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSnake();
+      ctx.fillStyle = 'red';
+      ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+      updateSnake();
+
+      setTimeout(gameLoop, 100);
+    }
+
+    playButton.addEventListener('click', () => {
+      welcomeScreen.style.display = 'none';
+      canvas.style.display = 'block';
+      gameLoop();
     });
   </script>
 </body>
