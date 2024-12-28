@@ -86,6 +86,13 @@
     .command-button:hover {
       color: white;
     }
+
+    .footer {
+      margin-top: 20px;
+      color: #ff0000;
+      font-size: 0.8em;
+      font-family: 'Courier New', monospace;
+    }
   </style>
 </head>
 <body>
@@ -112,6 +119,10 @@
         Type <span class="command-button" onclick="executeCommand('help')">help</span> for a list of commands.
       </div>
     </div>
+  </div>
+
+  <div class="footer">
+    5fdxnFw9rnRT8Um2WV6ykwz2k6d2n3WfmwbkEJmcpump
   </div>
 
   <script>
@@ -145,7 +156,6 @@
 
     let isFirstDesign = true;
 
-    // Lista de comandos
     const commands = {
       help: () => {
         const commandList = `
@@ -161,11 +171,10 @@ Available commands:
       switch: () => {
         isFirstDesign = !isFirstDesign;
         asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
-        return 'ASCII design switched!';
+        return 'freetheswarm';
       },
     };
 
-    // Ejecuta un comando y lo muestra en la terminal
     function executeCommand(command) {
       const commandOutput = document.createElement('div');
       commandOutput.className = 'output';
