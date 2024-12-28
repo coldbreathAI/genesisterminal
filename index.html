@@ -142,7 +142,7 @@
     <h1>DEGEN TERMINAL</h1>
     <h2>"Decrypt the truth"</h2>
     <div class="ascii-container" id="asciiArt">
-      <pre>
+      <pre id="asciiText">
                __          _.-'~~~`-._
        _.-'~~~`~~'~~`---.__.'         `.
       /                         .         \
@@ -164,8 +164,8 @@
 
     <!-- Video oculto para reproducir solo el audio -->
     <iframe id="youtubePlayer"
-            src="https://www.youtube.com/embed/xNjyG8S4_kI?autoplay=0&controls=0"
-            style="width: 100%; height: 0; border: none; visibility: hidden;"></iframe>
+            src="https://www.youtube.com/embed/xNjyG8S4_kI?controls=0"
+            style="width: 0; height: 0; visibility: hidden;" allow="autoplay"></iframe>
 
     <div class="terminal" id="terminal">
       <div class="output">Welcome to DEGEN TERMINAL</div>
@@ -182,6 +182,7 @@
 
   <script>
     const asciiArt = document.getElementById('asciiArt');
+    const asciiText = document.getElementById('asciiText');
     const player = document.getElementById('youtubePlayer');
     const input = document.getElementById('terminalInput');
 
@@ -214,11 +215,14 @@
 
     const commands = {
       help: 'Available commands: help, clear, switch',
-      clear: '',
+      clear: () => {
+        asciiArt.innerHTML = '';
+        return 'Screen cleared!';
+      },
       switch: () => {
         isFirstDesign = !isFirstDesign;
-        asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
-        return 'The whale is watching you';
+        asciiText.innerText = isFirstDesign ? firstDesign : secondDesign;
+        return 'The whale is watching you.';
       },
     };
 
@@ -232,12 +236,10 @@
           terminal.insertBefore(output, input.parentElement);
 
           const response = commands[value] ? commands[value]() : `Unknown command: "${value}"`;
-          if (response !== '') {
-            const responseOutput = document.createElement('div');
-            responseOutput.className = 'output';
-            responseOutput.textContent = response;
-            terminal.insertBefore(responseOutput, input.parentElement);
-          }
+          const responseOutput = document.createElement('div');
+          responseOutput.className = 'output';
+          responseOutput.textContent = response;
+          terminal.insertBefore(responseOutput, input.parentElement);
         }
         input.value = '';
         terminal.scrollTop = terminal.scrollHeight;
@@ -245,11 +247,11 @@
     });
 
     function playAudio() {
-      player.src = "https://www.youtube.com/embed/xNjyG8S4_kI?autoplay=1&controls=0";
+      player.src += "&autoplay=1";
     }
 
     function pauseAudio() {
-      player.src = "https://www.youtube.com/embed/xNjyG8S4_kI?autoplay=0&controls=0";
+      player.src = player.src.replace("&autoplay=1", "");
     }
   </script>
 </body>
