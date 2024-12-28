@@ -1,144 +1,72 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criptic Genesis</title>
-    <style>
-        /* Base de estilos */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier New', monospace;
-            color: #00ff88;
-            background: #000;
-            text-align: center;
-        }
-
-        /* Cabecera */
-        header {
-            padding: 20px;
-            border-bottom: 2px solid #00ff88;
-        }
-
-        header pre {
-            font-size: 1.2rem;
-            color: #00ff88;
-            text-shadow: 0 0 5px #00ff88;
-        }
-
-        /* Contenedor principal */
-        .container {
-            padding: 40px;
-        }
-
-        .container div {
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 600px;
-            border: 1px dashed #00ff88;
-            text-align: center;
-            transition: background 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .container div:hover {
-            background: #00ff88;
-            color: #000;
-        }
-
-        /* Pie de página */
-        footer {
-            margin-top: 20px;
-            padding: 10px;
-            color: #00ff88;
-            font-size: 0.8rem;
-            border-top: 1px solid #00ff88;
-        }
-
-        footer a {
-            color: #00ff88;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEGEN TERMINAL</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: "Courier New", Courier, monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    pre {
+      font-size: 1em;
+      line-height: 1.5em;
+      margin: 20px auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .container {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    a {
+      color: #0f0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <pre>
- ██████╗ ██████╗ ██╗██████╗ ████████╗██╗ ██████╗ █████╗  ██████╗ 
-██╔════╝██╔═══██╗██║██╔══██╗╚══██╔══╝██║██╔════╝██╔══██╗██╔════╝ 
-██║     ██║   ██║██║██║  ██║   ██║   ██║██║     ███████║██║  ███╗
-██║     ██║   ██║██║██║  ██║   ██║   ██║██║     ██╔══██║██║   ██║
-╚██████╗╚██████╔╝██║██████╔╝   ██║   ██║╚██████╗██║  ██║╚██████╔╝
- ╚═════╝ ╚═════╝ ╚═╝╚═════╝    ╚═╝   ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ 
-        </pre>
-    </header>
-
-    <div class="container">
-        <div onclick="reveal('section1')">
-            > Ingresar al **Nivel 1**
-        </div>
-        <div onclick="reveal('section2')">
-            > Descifrar **El Código**
-        </div>
-        <div onclick="reveal('section3')">
-            > Conectar con **La Fuente**
-        </div>
-    </div>
-
-    <div id="section1" class="container" style="display: none;">
-        <pre>
-██╗     ██╗███████╗███╗   ██╗███████╗██╗     
-██║     ██║██╔════╝████╗  ██║██╔════╝██║     
-██║     ██║█████╗  ██╔██╗ ██║█████╗  ██║     
-██║     ██║██╔══╝  ██║╚██╗██║██╔══╝  ██║     
-███████╗██║███████╗██║ ╚████║███████╗███████╗
-╚══════╝╚═╝╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝
-        </pre>
-        <p>Has alcanzado el Nivel 1. ¿Qué significa esto? Solo tú lo sabes.</p>
-    </div>
-
-    <div id="section2" class="container" style="display: none;">
-        <pre>
-██╗   ██╗███████╗██╗      ██████╗  ██████╗ ██████╗ ███████╗
-██║   ██║██╔════╝██║     ██╔═══██╗██╔════╝ ██╔══██╗██╔════╝
-██║   ██║█████╗  ██║     ██║   ██║██║  ███╗██████╔╝█████╗  
-██║   ██║██╔══╝  ██║     ██║   ██║██║   ██║██╔═══╝ ██╔══╝  
-╚██████╔╝███████╗███████╗╚██████╔╝╚██████╔╝██║     ███████╗
- ╚═════╝ ╚══════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝     ╚══════╝
-        </pre>
-        <p>La respuesta siempre ha estado aquí. Es tu turno de actuar.</p>
-    </div>
-
-    <div id="section3" class="container" style="display: none;">
-        <pre>
-███████╗██╗   ██╗███████╗███╗   ██╗ ██████╗ ████████╗
-██╔════╝██║   ██║██╔════╝████╗  ██║██╔═══██╗╚══██╔══╝
-███████╗██║   ██║█████╗  ██╔██╗ ██║██║   ██║   ██║   
-╚════██║██║   ██║██╔══╝  ██║╚██╗██║██║   ██║   ██║   
-███████║╚██████╔╝███████╗██║ ╚████║╚██████╔╝   ██║   
-╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝    ╚═╝   
-        </pre>
-        <p>La conexión ha sido establecida. Bienvenido al Origen.</p>
-    </div>
-
-    <footer>
-        <p>Criptic Genesis © 2024</p>
-    </footer>
-
-    <script>
-        function reveal(sectionId) {
-            // Ocultar todas las secciones
-            const sections = document.querySelectorAll('.container');
-            sections.forEach(section => section.style.display = 'none');
-
-            // Mostrar la sección seleccionada
-            document.getElementById(sectionId).style.display = 'block';
-        }
-    </script>
+  <div class="container">
+    <h1>DEGEN TERMINAL</h1>
+    <pre>
+               __          _.-'~~~`-._
+       _.-'~~~`~~'~~`---.__.'         `.
+      /                         .         \
+     /         /\   /\         ;      .    |
+    |      <   0) ( 0) >       '      .    |
+     \         \  /\  /                 ; /
+      `\ .     .\||||/.,           .   . |/
+        `-=_     `----'     _.--'       |
+             `--.___    __.-'            |
+                    `~~~`                 '
+    </pre>
+    <pre>
+              __         _.-'~~~`-._
+    _.-'~~~`~~'~~`---.__.'         `.
+   /                                \
+  /   ~~   ~~       ~~~     ~~       \
+ |    O)   O)           )    ~~~      |
+  \        ___     \_/      ___       /
+   `\      \_/                 \     /
+     `\        .     ~~~        \  .'
+       `--.                     .--'
+           `--.___         __.--'
+                 `~~~-----~~~`
+    </pre>
+    <p>Designed for the most degen coders out there. 🚀</p>
+    <p><a href="#">terminal of lies</a></p>
+  </div>
 </body>
 </html>
