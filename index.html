@@ -13,31 +13,43 @@
       font-family: 'Press Start 2P', monospace;
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin: 20px 0;
+    }
+
+    pre {
+      font-size: 1em;
+      line-height: 1.5em;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .ascii-container {
+      margin: 20px auto;
     }
 
     .terminal {
       background-color: #000;
       color: #0f0;
-      width: 80%;
-      max-width: 800px;
-      height: 70%;
+      width: 60%;
+      max-width: 300px;
+      height: 150px;
       border: 2px solid #0f0;
       border-radius: 5px;
-      padding: 20px;
+      padding: 10px;
       box-sizing: border-box;
       overflow-y: auto;
-      font-size: 0.8rem;
-      margin-bottom: 20px;
-    }
-
-    .ascii-container {
-      text-align: center;
-      margin-bottom: 20px;
+      font-size: 0.7rem;
+      margin: 20px auto;
     }
 
     .input-line {
@@ -55,7 +67,7 @@
       border: none;
       outline: none;
       font-family: 'Press Start 2P', monospace;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       flex-grow: 1;
     }
 
@@ -66,7 +78,7 @@
 
     /* Scrollbar styling */
     .terminal::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
 
     .terminal::-webkit-scrollbar-thumb {
@@ -80,8 +92,10 @@
   </style>
 </head>
 <body>
-  <div class="ascii-container">
-    <pre id="asciiArt">
+  <div class="container">
+    <h1>DEGEN TERMINAL</h1>
+    <div class="ascii-container" id="asciiArt">
+      <pre>
                __          _.-'~~~`-._
        _.-'~~~`~~'~~`---.__.'         `.
       /                         .         \
@@ -92,15 +106,15 @@
         `-=_     `----'     _.--'       |
              `--.___    __.-'            |
                     `~~~`                 '
-    </pre>
-  </div>
-
-  <div class="terminal" id="terminal">
-    <div class="output">Welcome to DEGEN TERMINAL</div>
-    <div class="output">Type "help" for a list of commands.</div>
-    <div class="input-line">
-      <span class="prompt">>_</span>
-      <input type="text" id="terminalInput" autofocus />
+      </pre>
+    </div>
+    <div class="terminal" id="terminal">
+      <div class="output">Welcome to DEGEN TERMINAL</div>
+      <div class="output">Type "help" for a list of commands.</div>
+      <div class="input-line">
+        <span class="prompt">>_</span>
+        <input type="text" id="terminalInput" autofocus />
+      </div>
     </div>
   </div>
 
@@ -137,41 +151,39 @@
 
     let isFirstDesign = true;
 
-    // Alternar diseños ASCII al hacer clic en el arte
-    asciiArt.addEventListener('click', () => {
-      isFirstDesign = !isFirstDesign;
-      asciiArt.innerText = isFirstDesign ? firstDesign : secondDesign;
-    });
-
+    // Comandos disponibles
     const commands = {
-      help: 'Available commands: help, clear, about',
+      help: 'Available commands: help, clear, switch',
       clear: '',
-      about: 'DEGEN TERMINAL: A cryptic web experience.',
+      switch: () => {
+        isFirstDesign = !isFirstDesign;
+        asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
+        return 'ASCII design switched!';
+      },
     };
 
+    // Manejar la entrada de la terminal
     input.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         const value = input.value.trim();
         if (value) {
+          // Mostrar el comando ingresado
           const commandOutput = document.createElement('div');
           commandOutput.className = 'output';
           commandOutput.textContent = `>_ ${value}`;
           terminal.insertBefore(commandOutput, input.parentElement);
 
+          // Ejecutar el comando
           if (commands[value]) {
-            if (value === 'clear') {
-              terminal.innerHTML = '<div class="input-line"><span class="prompt">>_</span><input type="text" id="terminalInput" autofocus /></div>';
-              const newInput = document.getElementById('terminalInput');
-              newInput.addEventListener('keydown', input.listener);
-              newInput.focus();
-              return;
-            } else {
+            const response = typeof commands[value] === 'function' ? commands[value]() : commands[value];
+            if (response !== '') {
               const responseOutput = document.createElement('div');
               responseOutput.className = 'output';
-              responseOutput.textContent = commands[value];
+              responseOutput.textContent = response;
               terminal.insertBefore(responseOutput, input.parentElement);
             }
           } else {
+            // Comando desconocido
             const errorOutput = document.createElement('div');
             errorOutput.className = 'output';
             errorOutput.textContent = `Unknown command: "${value}"`;
