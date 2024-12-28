@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: #000;
-      color: #fff;
+      color: #0f0;
       font-family: "Courier New", Courier, monospace;
       text-align: center;
       padding: 20px;
@@ -19,13 +19,16 @@
     pre {
       font-size: 1em;
       line-height: 1.5em;
-      margin: 20px auto;
       white-space: pre-wrap;
       word-wrap: break-word;
     }
     .container {
       margin: 0 auto;
       max-width: 800px;
+    }
+    .ascii-container {
+      margin: 20px auto;
+      cursor: pointer;
     }
     a {
       color: #0f0;
@@ -40,7 +43,8 @@
 <body>
   <div class="container">
     <h1>DEGEN TERMINAL</h1>
-    <pre>
+    <div class="ascii-container" id="asciiContainer">
+      <pre>
                __          _.-'~~~`-._
        _.-'~~~`~~'~~`---.__.'         `.
       /                         .         \
@@ -51,22 +55,34 @@
         `-=_     `----'     _.--'       |
              `--.___    __.-'            |
                     `~~~`                 '
-    </pre>
-    <pre>
-              __         _.-'~~~`-._
-    _.-'~~~`~~'~~`---.__.'         `.
-   /                                \
-  /   ~~   ~~       ~~~     ~~       \
- |    O)   O)           )    ~~~      |
-  \        ___     \_/      ___       /
-   `\      \_/                 \     /
-     `\        .     ~~~        \  .'
-       `--.                     .--'
-           `--.___         __.--'
-                 `~~~-----~~~`
-    </pre>
+      </pre>
+    </div>
     <p>free the whale</p>
     <p><a href="#">terminal of lies</a></p>
   </div>
+
+  <script>
+    // Seleccionar el contenedor ASCII
+    const asciiContainer = document.getElementById('asciiContainer');
+
+    // Segundo diseño ASCII
+    const secondDesign = `
+           __         _.-'~~~\`-._
+    _.-'~~~\`~~\`~~\`---.__.'         \`.
+   /                                \\
+  /   ~~   ~~       ~~~     ~~       \\
+ |    O)   O)           )    ~~~      |
+  \\        ___     \\_/      ___       /
+   \`\\      \\_/                 \\     /
+     \`\\        .     ~~~        \\  .'
+       \`--.                     .--'
+           \`--.___         __.--'
+                 \`~~~-----~~~\``;
+
+    // Cambiar el diseño al hacer clic
+    asciiContainer.addEventListener('click', () => {
+      asciiContainer.innerHTML = `<pre>${secondDesign}</pre>`;
+    });
+  </script>
 </body>
 </html>
