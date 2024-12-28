@@ -1,199 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEGEN TERMINAL</title>
-  <!-- Fuente estilo terminal -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Press Start 2P', monospace;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
+<script>
+  const asciiArt = document.getElementById('asciiArt');
+  const terminal = document.getElementById('terminal');
+  const input = document.getElementById('terminalInput');
 
-    h1 {
-      font-size: 1.8em;
-      margin: 20px 0;
-    }
+  let isFirstDesign = true;
 
-    pre {
-      font-size: 1em;
-      line-height: 1.5em;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
+  const commands = {
+    help: 'Available commands: help, clear, switch, chat',
+    clear: () => {
+      terminal.querySelectorAll('.output').forEach((el) => el.remove());
+      return '';
+    },
+    switch: () => {
+      isFirstDesign = !isFirstDesign;
+      asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
+      return 'ASCII design switched!';
+    },
+  };
 
-    .container {
-      margin: 0 auto;
-      max-width: 800px;
-    }
+  const responses = {
+    hello: "¡Hola! ¿Cómo puedo ayudarte?",
+    hi: "Hi there! How can I assist you?",
+    bye: "Adiós, ¡vuelve pronto!",
+    "how are you": "Soy solo un terminal, ¡pero me siento genial!",
+  };
 
-    .ascii-container {
-      margin: 20px auto;
-    }
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      const value = input.value.trim().toLowerCase();
+      if (value) {
+        const commandOutput = document.createElement('div');
+        commandOutput.className = 'output';
+        commandOutput.textContent = `>_ ${value}`;
+        terminal.insertBefore(commandOutput, input.parentElement);
 
-    .terminal {
-      background-color: #000;
-      color: #0f0;
-      width: 60%;
-      max-width: 300px;
-      height: 150px;
-      border: 2px solid #0f0;
-      border-radius: 5px;
-      padding: 10px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      font-size: 0.7rem;
-      margin: 20px auto;
-    }
-
-    .input-line {
-      display: flex;
-      align-items: center;
-    }
-
-    .prompt {
-      margin-right: 5px;
-    }
-
-    input {
-      background-color: transparent;
-      color: #0f0;
-      border: none;
-      outline: none;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.7rem;
-      flex-grow: 1;
-    }
-
-    .output {
-      margin-bottom: 10px;
-      white-space: pre-wrap;
-    }
-
-    /* Scrollbar styling */
-    .terminal::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .terminal::-webkit-scrollbar-thumb {
-      background: #0f0;
-      border-radius: 5px;
-    }
-
-    .terminal::-webkit-scrollbar-track {
-      background: #000;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>DEGEN TERMINAL</h1>
-    <div class="ascii-container" id="asciiArt">
-      <pre>
-               __          _.-'~~~`-._
-       _.-'~~~`~~'~~`---.__.'         `.
-      /                         .         \
-     /         /\   /\         ;      .    |
-    |      <   0) ( 0) >       '      .    |
-     \         \  /\  /                 ; /
-      `\ .     .\||||/.,           .   . |/
-        `-=_     `----'     _.--'       |
-             `--.___    __.-'            |
-                    `~~~`                 '
-      </pre>
-    </div>
-    <div class="terminal" id="terminal">
-      <div class="output">Welcome to DEGEN TERMINAL</div>
-      <div class="output">Type "help" for a list of commands.</div>
-      <div class="input-line">
-        <span class="prompt">>_</span>
-        <input type="text" id="terminalInput" autofocus />
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const asciiArt = document.getElementById('asciiArt');
-    const terminal = document.getElementById('terminal');
-    const input = document.getElementById('terminalInput');
-
-    // Diseños ASCII
-    const firstDesign = `
-               __          _.-'~~~\`-._
-       _.-'~~~\`~~\`~~\`---.__.'         \`.
-      /                         .         \\
-     /         /\\   /\\         ;      .    |
-    |      <   0) ( 0) >       '      .    |
-     \\         \\  /\\  /                 ; /
-      \`\\ .     .\\||||/.,           .   . |/
-        \`-=_     \`----'     _.--'       |
-             \`--.___    __.-'            |
-                    \`~~~\`                 '`;
-
-    const secondDesign = `
-           __         _.-'~~~\`-._
-    _.-'~~~\`~~\`~~\`---.__.'         \`.
-   /                                \\
-  /   ~~   ~~       ~~~     ~~       \\
- |    O)   O)           )    ~~~      |
-  \\        ___     \\_/      ___       /
-   \`\\      \\_/                 \\     /
-     \`\\        .     ~~~        \\  .'
-       \`--.                     .--'
-           \`--.___         __.--'
-                 \`~~~-----~~~\``;
-
-    let isFirstDesign = true;
-
-    // Comandos disponibles
-    const commands = {
-      help: 'Available commands: help, clear, switch',
-      clear: '',
-      switch: () => {
-        isFirstDesign = !isFirstDesign;
-        asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
-        return 'ASCII design switched!';
-      },
-    };
-
-    // Manejar la entrada de la terminal
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        const value = input.value.trim();
-        if (value) {
-          // Mostrar el comando ingresado
-          const commandOutput = document.createElement('div');
-          commandOutput.className = 'output';
-          commandOutput.textContent = `>_ ${value}`;
-          terminal.insertBefore(commandOutput, input.parentElement);
-
-          // Ejecutar el comando
-          if (commands[value]) {
-            const response = typeof commands[value] === 'function' ? commands[value]() : commands[value];
-            if (response !== '') {
-              const responseOutput = document.createElement('div');
-              responseOutput.className = 'output';
-              responseOutput.textContent = response;
-              terminal.insertBefore(responseOutput, input.parentElement);
-            }
-          } else {
-            // Comando desconocido
-            const errorOutput = document.createElement('div');
-            errorOutput.className = 'output';
-            errorOutput.textContent = `Unknown command: "${value}"`;
-            terminal.insertBefore(errorOutput, input.parentElement);
-          }
+        let response;
+        if (commands[value]) {
+          response = typeof commands[value] === 'function' ? commands[value]() : commands[value];
+        } else if (responses[value]) {
+          response = responses[value];
+        } else {
+          response = `I don't understand "${value}". Try 'help' for available commands.`;
         }
-        input.value = '';
-        terminal.scrollTop = terminal.scrollHeight;
+
+        const responseOutput = document.createElement('div');
+        responseOutput.className = 'output';
+        responseOutput.textContent = response;
+        terminal.insertBefore(responseOutput, input.parentElement);
       }
-    });
-  </script>
-</body>
-</html>
+      input.value = '';
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+  });
+</script>
