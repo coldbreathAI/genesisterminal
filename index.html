@@ -18,7 +18,7 @@
       overflow: hidden;
     }
 
-    /* Efecto de ruido */
+    /* Efecto de ruido CSS puro */
     body::after {
       content: "";
       position: absolute;
@@ -27,8 +27,9 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      background-image: url('https://media.giphy.com/media/hzM9rXnlDudSU/giphy.gif');
-      opacity: 0.05; /* Controlar la intensidad del ruido */
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.1;
       z-index: 1;
     }
 
@@ -43,15 +44,6 @@
       font-size: 1.2em;
       margin: 10px 0;
       color: #0f0;
-      z-index: 2;
-      position: relative;
-    }
-
-    pre {
-      font-size: 1em;
-      line-height: 1.5em;
-      white-space: pre-wrap;
-      word-wrap: break-word;
       z-index: 2;
       position: relative;
     }
@@ -109,20 +101,6 @@
       white-space: pre-wrap;
     }
 
-    /* Scrollbar styling */
-    .terminal::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .terminal::-webkit-scrollbar-thumb {
-      background: #0f0;
-      border-radius: 5px;
-    }
-
-    .terminal::-webkit-scrollbar-track {
-      background: #000;
-    }
-
     footer {
       margin-top: 30px;
       font-size: 0.8rem;
@@ -159,7 +137,7 @@
     </div>
     <div class="terminal" id="terminal">
       <div class="output">Welcome to DEGEN TERMINAL</div>
-      <div class="output">Type "freethewhale" to begin.</div>
+      <div class="output">Type "freethewhale" or "switch" to begin.</div>
       <div class="input-line">
         <span class="prompt">>_</span>
         <input type="text" id="terminalInput" autofocus />
@@ -171,23 +149,51 @@
   </footer>
 
   <script>
+    const asciiArt = document.getElementById('asciiArt');
     const terminal = document.getElementById('terminal');
     const input = document.getElementById('terminalInput');
 
-    // API simulada para interactuar con el usuario
-    async function getResponse(prompt) {
-      const response = await fetch("https://api.chatgptengine.com/respond", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt }),
-      });
-      const data = await response.json();
-      return data.response;
-    }
+    // Diseños ASCII
+    const firstDesign = `
+               __          _.-'~~~\`-._
+       _.-'~~~\`~~\`~~\`---.__.'         \`.
+      /                         .         \\
+     /         /\\   /\\         ;      .    |
+    |      <   0) ( 0) >       '      .    |
+     \\         \\  /\\  /                 ; /
+      \`\\ .     .\\||||/.,           .   . |/
+        \`-=_     \`----'     _.--'       |
+             \`--.___    __.-'            |
+                    \`~~~\`                 '`;
 
-    input.addEventListener('keydown', async (event) => {
+    const secondDesign = `
+           __         _.-'~~~\`-._
+    _.-'~~~\`~~\`~~\`---.__.'         \`.
+   /                                \\
+  /   ~~   ~~       ~~~     ~~       \\
+ |    O)   O)           )    ~~~      |
+  \\        ___     \\_/      ___       /
+   \`\\      \\_/                 \\     /
+     \`\\        .     ~~~        \\  .'
+       \`--.                     .--'
+           \`--.___         __.--'
+                 \`~~~-----~~~\``;
+
+    let isFirstDesign = true;
+
+    // Comandos disponibles
+    const commands = {
+      help: 'Available commands: help, clear, switch',
+      clear: '',
+      switch: () => {
+        isFirstDesign = !isFirstDesign;
+        asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
+        return 'The whale is watching you';
+      },
+    };
+
+    // Manejar la entrada de la terminal
+    input.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         const value = input.value.trim();
         if (value) {
@@ -197,14 +203,23 @@
           commandOutput.textContent = `>_ ${value}`;
           terminal.insertBefore(commandOutput, input.parentElement);
 
-          // Obtener respuesta de la terminal
-          const response = await getResponse(value);
-          const responseOutput = document.createElement('div');
-          responseOutput.className = 'output';
-          responseOutput.textContent = response || "Unknown command.";
-          terminal.insertBefore(responseOutput, input.parentElement);
+          // Ejecutar el comando
+          if (commands[value]) {
+            const response = typeof commands[value] === 'function' ? commands[value]() : commands[value];
+            if (response !== '') {
+              const responseOutput = document.createElement('div');
+              responseOutput.className = 'output';
+              responseOutput.textContent = response;
+              terminal.insertBefore(responseOutput, input.parentElement);
+            }
+          } else {
+            // Comando desconocido
+            const errorOutput = document.createElement('div');
+            errorOutput.className = 'output';
+            errorOutput.textContent = `Unknown command: "${value}"`;
+            terminal.insertBefore(errorOutput, input.parentElement);
+          }
         }
-
         input.value = '';
         terminal.scrollTop = terminal.scrollHeight;
       }
