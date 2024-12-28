@@ -41,7 +41,7 @@
       color: #0f0;
       width: 60%;
       max-width: 300px;
-      height: 150px;
+      height: 200px;
       border: 2px solid #0f0;
       border-radius: 5px;
       padding: 10px;
@@ -74,6 +74,18 @@
       margin-bottom: 10px;
       white-space: pre-wrap;
     }
+
+    .command-button {
+      color: #0f0;
+      text-decoration: underline;
+      cursor: pointer;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+    }
+
+    .command-button:hover {
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -96,10 +108,8 @@
 
     <div class="terminal" id="terminal">
       <div class="output">Welcome to DEGEN TERMINAL</div>
-      <div class="output">Type "help" for a list of commands.</div>
-      <div class="input-line">
-        <span class="prompt">>_</span>
-        <input type="text" id="terminalInput" autofocus />
+      <div class="output">
+        Type <span class="command-button" onclick="executeCommand('help')">help</span> for a list of commands.
       </div>
     </div>
   </div>
@@ -107,7 +117,6 @@
   <script>
     const asciiArt = document.getElementById('asciiArt');
     const terminal = document.getElementById('terminal');
-    const input = document.getElementById('terminalInput');
 
     const firstDesign = `
                __          _.-'~~~\`-._
@@ -136,8 +145,15 @@
 
     let isFirstDesign = true;
 
+    // Lista de comandos
     const commands = {
-      help: () => `Available commands:\n - help: List all commands\n - clear: Clear the terminal\n - switch: Switch ASCII design`,
+      help: () => {
+        const commandList = `
+Available commands:
+ - <span class="command-button" onclick="executeCommand('clear')">clear</span>: Clear the terminal
+ - <span class="command-button" onclick="executeCommand('switch')">switch</span>: Switch ASCII design`;
+        return commandList;
+      },
       clear: () => {
         terminal.querySelectorAll('.output').forEach(el => el.remove());
         return '';
@@ -149,26 +165,21 @@
       },
     };
 
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        const value = input.value.trim();
-        if (value) {
-          const commandOutput = document.createElement('div');
-          commandOutput.className = 'output';
-          commandOutput.textContent = `>_ ${value}`;
-          terminal.insertBefore(commandOutput, input.parentElement);
+    // Ejecuta un comando y lo muestra en la terminal
+    function executeCommand(command) {
+      const commandOutput = document.createElement('div');
+      commandOutput.className = 'output';
+      commandOutput.textContent = `>_ ${command}`;
+      terminal.appendChild(commandOutput);
 
-          let response = commands[value] ? commands[value]() : `Unknown command: "${value}". Type "help" to see available commands.`;
+      const response = commands[command] ? commands[command]() : `Unknown command: "${command}". Type "help" for available commands.`;
+      const responseOutput = document.createElement('div');
+      responseOutput.className = 'output';
+      responseOutput.innerHTML = response;
+      terminal.appendChild(responseOutput);
 
-          const responseOutput = document.createElement('div');
-          responseOutput.className = 'output';
-          responseOutput.textContent = response;
-          terminal.insertBefore(responseOutput, input.parentElement);
-        }
-        input.value = '';
-        terminal.scrollTop = terminal.scrollHeight;
-      }
-    });
+      terminal.scrollTop = terminal.scrollHeight;
+    }
   </script>
 </body>
 </html>
