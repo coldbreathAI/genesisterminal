@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEGEN TERMINAL</title>
-  <!-- Fuente estilo terminal -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
@@ -18,7 +17,6 @@
       overflow: hidden;
     }
 
-    /* Efecto de ruido CSS puro */
     body::after {
       content: "";
       position: absolute;
@@ -115,12 +113,34 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    .control-buttons {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
+      background-color: #0f0;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #fff;
+      color: #000;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>DEGEN TERMINAL</h1>
-    <h2></h2>
+    <h2>"Decrypt the truth"</h2>
     <div class="ascii-container" id="asciiArt">
       <pre>
                __          _.-'~~~`-._
@@ -135,6 +155,18 @@
                     `~~~`                 '
       </pre>
     </div>
+
+    <!-- Botones de control -->
+    <div class="control-buttons">
+      <button onclick="playAudio()">Play Audio</button>
+      <button onclick="pauseAudio()">Pause Audio</button>
+    </div>
+
+    <!-- Video oculto para reproducir solo el audio -->
+    <iframe id="youtubePlayer"
+            src="https://www.youtube.com/embed/xNjyG8S4_kI?autoplay=0&controls=0"
+            style="width: 100%; height: 0; border: none; visibility: hidden;"></iframe>
+
     <div class="terminal" id="terminal">
       <div class="output">Welcome to DEGEN TERMINAL</div>
       <div class="output">Type "freethewhale" or "switch" to begin.</div>
@@ -145,15 +177,14 @@
     </div>
   </div>
   <footer>
-    <p>freetheswarm<a href="#"></a>
+    <p>© 2024 DEGEN TERMINAL | Designed for the cryptic mind | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
   </footer>
 
   <script>
     const asciiArt = document.getElementById('asciiArt');
-    const terminal = document.getElementById('terminal');
+    const player = document.getElementById('youtubePlayer');
     const input = document.getElementById('terminalInput');
 
-    // Diseños ASCII
     const firstDesign = `
                __          _.-'~~~\`-._
        _.-'~~~\`~~\`~~\`---.__.'         \`.
@@ -181,7 +212,6 @@
 
     let isFirstDesign = true;
 
-    // Comandos disponibles
     const commands = {
       help: 'Available commands: help, clear, switch',
       clear: '',
@@ -192,38 +222,35 @@
       },
     };
 
-    // Manejar la entrada de la terminal
     input.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         const value = input.value.trim();
         if (value) {
-          // Mostrar el comando ingresado
-          const commandOutput = document.createElement('div');
-          commandOutput.className = 'output';
-          commandOutput.textContent = `>_ ${value}`;
-          terminal.insertBefore(commandOutput, input.parentElement);
+          const output = document.createElement('div');
+          output.className = 'output';
+          output.textContent = `>_ ${value}`;
+          terminal.insertBefore(output, input.parentElement);
 
-          // Ejecutar el comando
-          if (commands[value]) {
-            const response = typeof commands[value] === 'function' ? commands[value]() : commands[value];
-            if (response !== '') {
-              const responseOutput = document.createElement('div');
-              responseOutput.className = 'output';
-              responseOutput.textContent = response;
-              terminal.insertBefore(responseOutput, input.parentElement);
-            }
-          } else {
-            // Comando desconocido
-            const errorOutput = document.createElement('div');
-            errorOutput.className = 'output';
-            errorOutput.textContent = `Unknown command: "${value}"`;
-            terminal.insertBefore(errorOutput, input.parentElement);
+          const response = commands[value] ? commands[value]() : `Unknown command: "${value}"`;
+          if (response !== '') {
+            const responseOutput = document.createElement('div');
+            responseOutput.className = 'output';
+            responseOutput.textContent = response;
+            terminal.insertBefore(responseOutput, input.parentElement);
           }
         }
         input.value = '';
         terminal.scrollTop = terminal.scrollHeight;
       }
     });
+
+    function playAudio() {
+      player.src = "https://www.youtube.com/embed/xNjyG8S4_kI?autoplay=1&controls=0";
+    }
+
+    function pauseAudio() {
+      player.src = "https://www.youtube.com/embed/xNjyG8S4_kI?autoplay=0&controls=0";
+    }
   </script>
 </body>
 </html>
