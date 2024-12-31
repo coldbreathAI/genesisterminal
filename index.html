@@ -16,134 +16,92 @@
     h1 {
       margin: 20px 0;
       font-size: 32px;
+      text-decoration: underline;
     }
     .ascii-art {
       white-space: pre;
-      text-align: center;
-      color: #FFF;
+      text-align: left;
       margin: 20px auto;
+      color: #FFF;
+      max-width: 600px;
     }
     .nav {
       margin: 20px 0;
     }
-    .nav button {
-      background-color: #111;
+    .nav a {
+      text-decoration: none;
       color: #FFF;
-      border: 1px solid #FFF;
       padding: 10px 20px;
+      border: 1px solid #FFF;
       margin: 5px;
-      cursor: pointer;
-      font-size: 16px;
+      display: inline-block;
     }
-    .nav button:hover {
+    .nav a:hover {
       background-color: #222;
     }
-    .content {
-      display: none;
-      margin: 20px auto;
-      padding: 10px;
-      border: 1px solid #FFF;
-      background-color: #111;
-      max-width: 300px;
-      border-radius: 8px;
-      text-align: left;
-    }
-    .ascii {
-      white-space: pre;
-      text-align: left;
-      margin: 0 auto;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-    .intro {
-      margin: 20px auto;
-      max-width: 600px;
-      font-size: 18px;
-      line-height: 1.5;
-      background-color: #111;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #FFF;
+    footer {
+      margin-top: 20px;
+      color: #888;
+      font-size: 14px;
     }
   </style>
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-      });
-      document.getElementById(id).style.display = 'block';
-    }
-
-    function closeSections() {
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-      });
-    }
-  </script>
 </head>
 <body>
-  <div class="overlay" onclick="closeSections()"></div>
-  
   <h1>Bebop AI</h1>
+
+  <!-- ASCII-inspired structure -->
   <div class="ascii-art">
-    ╔════════════════════════════════════════╗  
-    ║   Welcome to Bebop AI, your gateway   ║  
-    ║   to seamless integration & growth!   ║  
-    ║            🚀🤖📊✨                  ║  
-    ╚════════════════════════════════════════╝
+    <pre>
+          🌌 Bebop AI World 🌌
+                    |
+       ┌───────────┴───────────┐
+       |                       |
+    🌳 Forest               🏰 Castle
+       |                       |
+  ┌────┴────┐           ┌──────┴──────┐
+  |         |           |             |
+🌊 Water  🌲 Grove     🪄 Arena      🔮 Tower
+  |                         |
+💎 Falls                ⚗️ Alchemy Lab
+    </pre>
   </div>
 
-  <div class="intro">
-    <p>¡Bienvenido a Bebop AI! Explora nuestra documentación, comunidad en Telegram, redes sociales y más. Haz clic en las opciones de abajo para comenzar.</p>
-  </div>
-
+  <!-- Navigation -->
   <div class="nav">
-    <button onclick="showSection('docs')">Docs 📜</button>
-    <button onclick="showSection('telegram')">Telegram ✉️</button>
-    <button onclick="showSection('twitter')">Twitter 🐦</button>
-    <button onclick="showSection('dexscreener')">Dexscreener 📊</button>
+    <a href="#docs">Docs 📜</a>
+    <a href="#telegram">Telegram ✉️</a>
+    <a href="#twitter">Twitter 🐦</a>
+    <a href="#dexscreener">Dexscreener 📊</a>
   </div>
 
-  <div id="docs" class="content">
-    <div class="ascii">
-      ╔════════════════╗  
-      ║   Docs 📜      ║  
-      ╚════════════════╝  
-    </div>
-    <p>Aquí encontrarás toda la documentación relevante.</p>
+  <!-- Content Sections -->
+  <div id="docs" class="ascii-art">
+    <pre>
+📜 Documentation:
+Explore detailed guides, FAQs, and tutorials.
+    </pre>
+  </div>
+  <div id="telegram" class="ascii-art">
+    <pre>
+✉️ Telegram:
+Join our community for live discussions and updates.
+    </pre>
+  </div>
+  <div id="twitter" class="ascii-art">
+    <pre>
+🐦 Twitter:
+Follow us for real-time announcements and insights.
+    </pre>
+  </div>
+  <div id="dexscreener" class="ascii-art">
+    <pre>
+📊 Dexscreener:
+Track analytics and market data in real-time.
+    </pre>
   </div>
 
-  <div id="telegram" class="content">
-    <div class="ascii">
-      ╔════════════════╗  
-      ║ Telegram ✉️    ║  
-      ╚════════════════╝  
-    </div>
-    <p>Únete a nuestra comunidad en Telegram.</p>
-  </div>
-
-  <div id="twitter" class="content">
-    <div class="ascii">
-      ╔════════════════╗  
-      ║  Twitter 🐦    ║  
-      ╚════════════════╝  
-    </div>
-    <p>Síguenos en Twitter para más actualizaciones.</p>
-  </div>
-
-  <div id="dexscreener" class="content">
-    <div class="ascii">
-      ╔════════════════╗  
-      ║ Dexscreener 📊 ║  
-      ╚════════════════╝  
-    </div>
-    <p>Consulta nuestras estadísticas en Dexscreener.</p>
-  </div>
+  <footer>
+    Bebop AI © 2025 - Inspired by Creative Collaboration
+  </footer>
 </body>
 </html>
