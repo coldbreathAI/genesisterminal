@@ -3,192 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEGEN TERMINAL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>Bebop AI</title>
   <style>
     body {
-      background-color: black;
-      color: white;
-      font-family: 'Press Start 2P', monospace;
+      font-family: monospace;
+      background-color: #000;
+      color: #00FF00;
+      text-align: center;
       margin: 0;
       padding: 0;
-      text-align: center;
     }
-
     h1 {
-      font-size: 1.8em;
       margin: 20px 0;
     }
-
-    pre {
-      font-size: 1em;
-      line-height: 1.5em;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+    .nav {
+      margin: 20px 0;
     }
-
-    .container {
-      margin: 0 auto;
-      max-width: 800px;
-    }
-
-    .ascii-container {
-      margin: 20px auto;
-    }
-
-    .terminal {
-      background-color: #000;
-      color: #0f0;
-      width: 60%;
-      max-width: 300px;
-      height: 200px;
-      border: 2px solid #0f0;
-      border-radius: 5px;
-      padding: 10px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      font-size: 0.7rem;
-      margin: 20px auto;
-    }
-
-    .input-line {
-      display: flex;
-      align-items: center;
-    }
-
-    .prompt {
-      margin-right: 5px;
-    }
-
-    input {
-      background-color: transparent;
-      color: #0f0;
-      border: none;
-      outline: none;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.7rem;
-      flex-grow: 1;
-    }
-
-    .output {
-      margin-bottom: 10px;
-      white-space: pre-wrap;
-    }
-
-    .command-button {
-      color: #0f0;
-      text-decoration: underline;
+    .nav button {
+      background-color: #111;
+      color: #00FF00;
+      border: 1px solid #00FF00;
+      padding: 10px 20px;
+      margin: 5px;
       cursor: pointer;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.7rem;
+      font-size: 16px;
     }
-
-    .command-button:hover {
-      color: white;
+    .nav button:hover {
+      background-color: #222;
     }
-
-    .footer {
-      margin-top: 20px;
-      color: #ff0000;
-      font-size: 0.8em;
-      font-family: 'Courier New', monospace;
+    .content {
+      display: none;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #00FF00;
+      background-color: #111;
+    }
+    .ascii {
+      white-space: pre;
+      text-align: left;
+      margin: 0 auto;
+      display: inline-block;
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <h1>DEGEN TERMINAL</h1>
-    <div class="ascii-container" id="asciiArt">
-      <pre>
-               __          _.-'~~~`-._
-       _.-'~~~`~~'~~`---.__.'         `.
-      /                         .         \
-     /         /\   /\         ;      .    |
-    |      <   0) ( 0) >       '      .    |
-     \         \  /\  /                 ; /
-      `\ .     .\||||/.,           .   . |/
-        `-=_     `----'     _.--'       |
-             `--.___    __.-'            |
-                    `~~~`                 '
-      </pre>
-    </div>
-
-    <div class="terminal" id="terminal">
-      <div class="output">Welcome to DEGEN TERMINAL</div>
-      <div class="output">
-        Type <span class="command-button" onclick="executeCommand('help')">help</span> for a list of commands.
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    5fdxnFw9rnRT8Um2WV6ykwz2k6d2n3WfmwbkEJmcpump
-  </div>
-
   <script>
-    const asciiArt = document.getElementById('asciiArt');
-    const terminal = document.getElementById('terminal');
-
-    const firstDesign = `
-               __          _.-'~~~\`-._
-       _.-'~~~\`~~\`~~\`---.__.'         \`.
-      /                         .         \\
-     /         /\\   /\\         ;      .    |
-    |      <   0) ( 0) >       '      .    |
-     \\         \\  /\\  /                 ; /
-      \`\\ .     .\\||||/.,           .   . |/
-        \`-=_     \`----'     _.--'       |
-             \`--.___    __.-'            |
-                    \`~~~\`                 '`;
-
-    const secondDesign = `
-           __         _.-'~~~\`-._
-    _.-'~~~\`~~\`~~\`---.__.'         \`.
-   /                                \\
-  /   ~~   ~~       ~~~     ~~       \\
- |    O)   O)           )    ~~~      |
-  \\        ___     \\_/      ___       /
-   \`\\      \\_/                 \\     /
-     \`\\        .     ~~~        \\  .'
-       \`--.                     .--'
-           \`--.___         __.--'
-                 \`~~~-----~~~\``;
-
-    let isFirstDesign = true;
-
-    const commands = {
-      help: () => {
-        const commandList = `
-Available commands:
- - <span class="command-button" onclick="executeCommand('clear')">clear</span>: Clear the terminal
- - <span class="command-button" onclick="executeCommand('switch')">switch</span>: Switch ASCII design`;
-        return commandList;
-      },
-      clear: () => {
-        terminal.querySelectorAll('.output').forEach(el => el.remove());
-        return '';
-      },
-      switch: () => {
-        isFirstDesign = !isFirstDesign;
-        asciiArt.innerHTML = `<pre>${isFirstDesign ? firstDesign : secondDesign}</pre>`;
-        return 'freetheswarm';
-      },
-    };
-
-    function executeCommand(command) {
-      const commandOutput = document.createElement('div');
-      commandOutput.className = 'output';
-      commandOutput.textContent = `>_ ${command}`;
-      terminal.appendChild(commandOutput);
-
-      const response = commands[command] ? commands[command]() : `Unknown command: "${command}". Type "help" for available commands.`;
-      const responseOutput = document.createElement('div');
-      responseOutput.className = 'output';
-      responseOutput.innerHTML = response;
-      terminal.appendChild(responseOutput);
-
-      terminal.scrollTop = terminal.scrollHeight;
+    function showSection(id) {
+      document.querySelectorAll('.content').forEach(content => {
+        content.style.display = 'none';
+      });
+      document.getElementById(id).style.display = 'block';
     }
   </script>
+</head>
+<body>
+  <h1>Bebop AI</h1>
+  <div class="nav">
+    <button onclick="showSection('docs')">Docs</button>
+    <button onclick="showSection('telegram')">Telegram</button>
+    <button onclick="showSection('twitter')">Twitter</button>
+    <button onclick="showSection('dexscreener')">Dexscreener</button>
+  </div>
+
+  <div id="docs" class="content">
+    <div class="ascii">
+      ________________________
+     /                        \
+    |     Documentación       |
+     \________________________/
+            |
+           /|\
+          / | \
+         /  |  \
+      </div>
+      <p>Aquí encontrarás toda la documentación relevante.</p>
+  </div>
+
+  <div id="telegram" class="content">
+    <div class="ascii">
+      ________________________
+     /                        \
+    |        Telegram         |
+     \________________________/
+            |
+           /|\
+          / | \
+         /  |  \
+      </div>
+      <p>Únete a nuestra comunidad en Telegram.</p>
+  </div>
+
+  <div id="twitter" class="content">
+    <div class="ascii">
+      ________________________
+     /                        \
+    |        Twitter          |
+     \________________________/
+            |
+           /|\
+          / | \
+         /  |  \
+      </div>
+      <p>Síguenos en Twitter para más actualizaciones.</p>
+  </div>
+
+  <div id="dexscreener" class="content">
+    <div class="ascii">
+      ________________________
+     /                        \
+    |      Dexscreener        |
+     \________________________/
+            |
+           /|\
+          / | \
+         /  |  \
+      </div>
+      <p>Consulta nuestras estadísticas en Dexscreener.</p>
+  </div>
 </body>
 </html>
