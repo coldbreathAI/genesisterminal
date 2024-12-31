@@ -8,21 +8,28 @@
     body {
       font-family: monospace;
       background-color: #000;
-      color: #00FF00;
+      color: #FFF;
       text-align: center;
       margin: 0;
       padding: 0;
     }
     h1 {
       margin: 20px 0;
+      font-size: 32px;
+    }
+    .ascii-art {
+      white-space: pre;
+      text-align: center;
+      color: #FFF;
+      margin: 20px auto;
     }
     .nav {
       margin: 20px 0;
     }
     .nav button {
       background-color: #111;
-      color: #00FF00;
-      border: 1px solid #00FF00;
+      color: #FFF;
+      border: 1px solid #FFF;
       padding: 10px 20px;
       margin: 5px;
       cursor: pointer;
@@ -33,16 +40,36 @@
     }
     .content {
       display: none;
-      margin: 20px;
-      padding: 20px;
-      border: 1px solid #00FF00;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #FFF;
       background-color: #111;
+      max-width: 300px;
+      border-radius: 8px;
+      text-align: left;
     }
     .ascii {
       white-space: pre;
       text-align: left;
       margin: 0 auto;
-      display: inline-block;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .intro {
+      margin: 20px auto;
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.5;
+      background-color: #111;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #FFF;
     }
   </style>
   <script>
@@ -52,71 +79,71 @@
       });
       document.getElementById(id).style.display = 'block';
     }
+
+    function closeSections() {
+      document.querySelectorAll('.content').forEach(content => {
+        content.style.display = 'none';
+      });
+    }
   </script>
 </head>
 <body>
+  <div class="overlay" onclick="closeSections()"></div>
+  
   <h1>Bebop AI</h1>
+  <div class="ascii-art">
+    ╔════════════════════════════════════════╗  
+    ║   Welcome to Bebop AI, your gateway   ║  
+    ║   to seamless integration & growth!   ║  
+    ║            🚀🤖📊✨                  ║  
+    ╚════════════════════════════════════════╝
+  </div>
+
+  <div class="intro">
+    <p>¡Bienvenido a Bebop AI! Explora nuestra documentación, comunidad en Telegram, redes sociales y más. Haz clic en las opciones de abajo para comenzar.</p>
+  </div>
+
   <div class="nav">
-    <button onclick="showSection('docs')">Docs</button>
-    <button onclick="showSection('telegram')">Telegram</button>
-    <button onclick="showSection('twitter')">Twitter</button>
-    <button onclick="showSection('dexscreener')">Dexscreener</button>
+    <button onclick="showSection('docs')">Docs 📜</button>
+    <button onclick="showSection('telegram')">Telegram ✉️</button>
+    <button onclick="showSection('twitter')">Twitter 🐦</button>
+    <button onclick="showSection('dexscreener')">Dexscreener 📊</button>
   </div>
 
   <div id="docs" class="content">
     <div class="ascii">
-      ________________________
-     /                        \
-    |     Documentación       |
-     \________________________/
-            |
-           /|\
-          / | \
-         /  |  \
-      </div>
-      <p>Aquí encontrarás toda la documentación relevante.</p>
+      ╔════════════════╗  
+      ║   Docs 📜      ║  
+      ╚════════════════╝  
+    </div>
+    <p>Aquí encontrarás toda la documentación relevante.</p>
   </div>
 
   <div id="telegram" class="content">
     <div class="ascii">
-      ________________________
-     /                        \
-    |        Telegram         |
-     \________________________/
-            |
-           /|\
-          / | \
-         /  |  \
-      </div>
-      <p>Únete a nuestra comunidad en Telegram.</p>
+      ╔════════════════╗  
+      ║ Telegram ✉️    ║  
+      ╚════════════════╝  
+    </div>
+    <p>Únete a nuestra comunidad en Telegram.</p>
   </div>
 
   <div id="twitter" class="content">
     <div class="ascii">
-      ________________________
-     /                        \
-    |        Twitter          |
-     \________________________/
-            |
-           /|\
-          / | \
-         /  |  \
-      </div>
-      <p>Síguenos en Twitter para más actualizaciones.</p>
+      ╔════════════════╗  
+      ║  Twitter 🐦    ║  
+      ╚════════════════╝  
+    </div>
+    <p>Síguenos en Twitter para más actualizaciones.</p>
   </div>
 
   <div id="dexscreener" class="content">
     <div class="ascii">
-      ________________________
-     /                        \
-    |      Dexscreener        |
-     \________________________/
-            |
-           /|\
-          / | \
-         /  |  \
-      </div>
-      <p>Consulta nuestras estadísticas en Dexscreener.</p>
+      ╔════════════════╗  
+      ║ Dexscreener 📊 ║  
+      ╚════════════════╝  
+    </div>
+    <p>Consulta nuestras estadísticas en Dexscreener.</p>
   </div>
 </body>
 </html>
