@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bebop AI</title>
+  <title>ascii.cat</title>
   <style>
     body {
       font-family: monospace;
@@ -17,33 +17,34 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 5px 15px;
       background-color: #111;
-      border-bottom: 1px solid #FFF;
+      border-bottom: 1px solid #444;
     }
     header h1 {
-      font-size: 18px;
+      font-size: 16px;
       margin: 0;
+      color: #AAA;
     }
     .nav {
       display: flex;
-      gap: 20px;
+      gap: 15px;
     }
     .nav button {
       background: none;
-      color: #FFF;
-      border: 1px solid #FFF;
-      padding: 5px 15px;
+      color: #CCC;
+      border: none;
+      padding: 5px 10px;
       font-size: 14px;
       cursor: pointer;
     }
     .nav button:hover {
-      background-color: #222;
+      color: #FFF;
     }
     .ascii-art {
       white-space: pre;
       text-align: center;
-      margin: 40px auto;
+      margin: 20px auto;
       color: #FFF;
       max-width: 600px;
     }
@@ -54,7 +55,6 @@
       text-align: left;
       font-size: 16px;
       line-height: 1.5;
-      animation: blink 4s infinite;
     }
     .cat .question {
       display: block;
@@ -82,6 +82,7 @@
       display: block;
       content: "／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ";
       white-space: pre;
+      animation: blink 4s infinite;
     }
     .cat .question::before {
       content: "?";
@@ -90,12 +91,12 @@
 </head>
 <body>
   <header>
-    <h1>Bebop AI</h1>
+    <h1>ascii.cat</h1>
     <nav class="nav">
-      <button onclick="alert('Docs feature coming soon!')">Docs 📜</button>
-      <button onclick="alert('Telegram feature coming soon!')">Telegram ✉️</button>
-      <button onclick="alert('Twitter feature coming soon!')">Twitter 🐦</button>
-      <button onclick="alert('Dexscreener feature coming soon!')">Dexscreener 📊</button>
+      <button onclick="alert('Docs feature coming soon!')">Docs</button>
+      <button onclick="alert('Telegram feature coming soon!')">Telegram</button>
+      <button onclick="alert('Twitter feature coming soon!')">Twitter</button>
+      <button onclick="alert('Dexscreener feature coming soon!')">Dexscreener</button>
     </nav>
   </header>
 
@@ -119,10 +120,6 @@
   <!-- Gato animado -->
   <div class="cat">
     <div class="question"></div>
-    ／l、<br>
-    （ﾟ､ ｡ ７<br>
-    l, ~ヽ<br>
-    じしf_, )ノ
   </div>
 </body>
 </html>
