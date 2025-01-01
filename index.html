@@ -56,11 +56,11 @@
       font-size: 16px;
       line-height: 1.5;
     }
-    .cat .question {
-      display: block;
-      text-align: center;
+    .question {
+      position: absolute;
+      top: -20px;
+      left: 10px;
       font-size: 20px;
-      margin-bottom: -15px;
       animation: bounce 2s infinite;
     }
     @keyframes blink {
@@ -84,9 +84,6 @@
       content: "／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ";
       white-space: pre;
       animation: blink 4s infinite;
-    }
-    .cat .question::before {
-      content: "?";
     }
   </style>
 </head>
