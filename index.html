@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ascii.cat</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/figlet/1.5.2/figlet.min.js"></script>
+  <!-- Incluye la biblioteca figlet.js desde la carpeta local -->
+  <script src="figlet/figlet.min.js"></script>
   <style>
     body {
       font-family: monospace;
@@ -152,8 +153,8 @@
 
   <!-- ASCII Name Generator -->
   <div class="generator-container">
-    <h2>ASCII Name Generator</h2>
-    <input type="text" id="text-input" placeholder="Enter your text" />
+    <h2>Generador de Nombres ASCII</h2>
+    <input type="text" id="text-input" placeholder="Introduce tu texto" />
     <select id="font-select">
       <option value="Standard">Standard</option>
       <option value="Ghost">Ghost</option>
@@ -161,7 +162,7 @@
       <option value="Big">Big</option>
       <option value="Block">Block</option>
     </select>
-    <button onclick="generateASCII()">Generate</button>
+    <button onclick="generateASCII()">Generar</button>
     <div class="ascii-output" id="ascii-output"></div>
   </div>
 
@@ -172,17 +173,6 @@
 
   <script>
     function generateASCII() {
-      const text = document.getElementById('text-input').value || "ascii.cat";
-      const font = document.getElementById('font-select').value;
+      const text = document.getElementById
 
-      figlet(text, { font: font }, function (err, result) {
-        if (err) {
-          console.error('Error generating ASCII art:', err);
-          return;
-        }
-        document.getElementById('ascii-output').innerText = result;
-      });
-    }
-  </script>
-</body>
-</html>
+`text-input').value || "ascii.cat"; const font = document.getElementById('font-select').value; figlet.text(text, { font: font }, function(err, result) { if (err) { console.error('Error generando ASCII:', err); return; } document.getElementById('ascii-output').innerText = result; }); } </script> </body> </html>`
