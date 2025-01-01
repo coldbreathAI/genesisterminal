@@ -9,45 +9,101 @@
       font-family: monospace;
       background-color: #000;
       color: #FFF;
-      text-align: center;
       margin: 0;
       padding: 0;
     }
-    h1 {
-      margin: 20px 0;
-      font-size: 32px;
-      text-decoration: underline;
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #111;
+      border-bottom: 1px solid #FFF;
+    }
+    header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+    .nav button {
+      background: none;
+      color: #FFF;
+      border: 1px solid #FFF;
+      padding: 5px 15px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .nav button:hover {
+      background-color: #222;
+    }
+    .content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #111;
+      padding: 15px;
+      border: 1px solid #FFF;
+      border-radius: 5px;
+      max-width: 300px;
+      text-align: center;
     }
     .ascii-art {
       white-space: pre;
-      text-align: left;
+      text-align: center;
       margin: 20px auto;
       color: #FFF;
       max-width: 600px;
-    }
-    .nav {
-      margin: 20px 0;
-    }
-    .nav a {
-      text-decoration: none;
-      color: #FFF;
-      padding: 10px 20px;
-      border: 1px solid #FFF;
-      margin: 5px;
-      display: inline-block;
-    }
-    .nav a:hover {
-      background-color: #222;
     }
     footer {
       margin-top: 20px;
       color: #888;
       font-size: 14px;
+      text-align: center;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
   </style>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.content').forEach(content => {
+        content.style.display = 'none';
+      });
+      document.querySelector('.overlay').style.display = 'block';
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function closeSections() {
+      document.querySelectorAll('.content').forEach(content => {
+        content.style.display = 'none';
+      });
+      document.querySelector('.overlay').style.display = 'none';
+    }
+  </script>
 </head>
 <body>
-  <h1>Bebop AI</h1>
+  <div class="overlay" onclick="closeSections()"></div>
+
+  <header>
+    <h1>Bebop AI</h1>
+    <nav class="nav">
+      <button onclick="showSection('docs')">Docs 📜</button>
+      <button onclick="showSection('telegram')">Telegram ✉️</button>
+      <button onclick="showSection('twitter')">Twitter 🐦</button>
+      <button onclick="showSection('dexscreener')">Dexscreener 📊</button>
+    </nav>
+  </header>
 
   <!-- ASCII-inspired structure -->
   <div class="ascii-art">
@@ -66,38 +122,22 @@
     </pre>
   </div>
 
-  <!-- Navigation -->
-  <div class="nav">
-    <a href="#docs">Docs 📜</a>
-    <a href="#telegram">Telegram ✉️</a>
-    <a href="#twitter">Twitter 🐦</a>
-    <a href="#dexscreener">Dexscreener 📊</a>
-  </div>
-
   <!-- Content Sections -->
-  <div id="docs" class="ascii-art">
-    <pre>
-📜 Documentation:
-Explore detailed guides, FAQs, and tutorials.
-    </pre>
+  <div id="docs" class="content">
+    <h2>📜 Documentation</h2>
+    <p>Explore detailed guides, FAQs, and tutorials.</p>
   </div>
-  <div id="telegram" class="ascii-art">
-    <pre>
-✉️ Telegram:
-Join our community for live discussions and updates.
-    </pre>
+  <div id="telegram" class="content">
+    <h2>✉️ Telegram</h2>
+    <p>Join our community for live discussions and updates.</p>
   </div>
-  <div id="twitter" class="ascii-art">
-    <pre>
-🐦 Twitter:
-Follow us for real-time announcements and insights.
-    </pre>
+  <div id="twitter" class="content">
+    <h2>🐦 Twitter</h2>
+    <p>Follow us for real-time announcements and insights.</p>
   </div>
-  <div id="dexscreener" class="ascii-art">
-    <pre>
-📊 Dexscreener:
-Track analytics and market data in real-time.
-    </pre>
+  <div id="dexscreener" class="content">
+    <h2>📊 Dexscreener</h2>
+    <p>Track analytics and market data in real-time.</p>
   </div>
 
   <footer>
