@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ascii.cat</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/figlet/1.5.2/figlet.min.js"></script>
   <style>
     body {
       font-family: monospace;
@@ -20,20 +21,15 @@
       padding: 5px 15px;
       background-color: #111;
       border-bottom: 1px solid #444;
-      flex-wrap: wrap;
     }
     header h1 {
       font-size: 16px;
       margin: 0;
       color: #AAA;
-      flex: 1 1 auto;
     }
     .nav {
       display: flex;
-      gap: 10px;
-      flex: 1 1 auto;
-      justify-content: flex-end;
-      flex-wrap: wrap;
+      gap: 15px;
     }
     .nav button {
       background: none;
@@ -53,6 +49,38 @@
       color: #FFF;
       max-width: 600px;
     }
+    .generator-container {
+      padding: 20px;
+      text-align: center;
+    }
+    .generator-container input,
+    .generator-container select,
+    .generator-container button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    .ascii-output {
+      white-space: pre;
+      background-color: #111;
+      padding: 20px;
+      margin-top: 20px;
+      border: 1px solid #444;
+      display: inline-block;
+      text-align: left;
+      max-width: 100%;
+      word-wrap: break-word;
+      overflow-x: auto;
+    }
+    button {
+      background-color: #222;
+      color: #FFF;
+      border: 1px solid #555;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #444;
+    }
     .cat {
       position: fixed;
       bottom: 20px;
@@ -63,8 +91,8 @@
     }
     .question {
       position: absolute;
-      top: -10px; /* Movida hacia abajo */
-      left: 30px; /* Movida más a la derecha */
+      top: -10px;
+      left: 30px;
       font-size: 20px;
       animation: bounce 2s infinite;
     }
@@ -89,26 +117,6 @@
       content: "／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ";
       white-space: pre;
       animation: blink 4s infinite;
-    }
-
-    /* Responsiveness */
-    @media (max-width: 768px) {
-      header {
-        padding: 10px;
-        text-align: center;
-      }
-      header h1 {
-        text-align: center;
-        flex: 1 1 100%;
-      }
-      .nav {
-        justify-content: center;
-        flex: 1 1 100%;
-      }
-      .nav button {
-        font-size: 12px;
-        padding: 5px 8px;
-      }
     }
   </style>
 </head>
@@ -140,9 +148,41 @@
     </pre>
   </div>
 
+  <!-- ASCII Name Generator -->
+  <div class="generator-container">
+    <h2>ASCII Name Generator</h2>
+    <input type="text" id="text-input" placeholder="Enter your text" />
+    <select id="font-select">
+      <option value="Standard">Standard</option>
+      <option value="Ghost">Ghost</option>
+      <option value="Slant">Slant</option>
+      <option value="Big">Big</option>
+      <option value="Block">Block</option>
+    </select>
+    <button onclick="generateASCII()">Generate</button>
+    <div class="ascii-output" id="ascii-output">
+      <!-- ASCII Art will appear here -->
+    </div>
+  </div>
+
   <!-- Gato animado -->
   <div class="cat">
     <div class="question">?</div>
   </div>
+
+  <script>
+    function generateASCII() {
+      const text = document.getElementById('text-input').value || "ascii.cat";
+      const font = document.getElementById('font-select').value;
+
+      figlet(text, { font: font }, function (err, result) {
+        if (err) {
+          console.error('Error generating ASCII art:', err);
+          return;
+        }
+        document.getElementById('ascii-output').innerText = result;
+      });
+    }
+  </script>
 </body>
 </html>
