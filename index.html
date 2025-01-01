@@ -8,10 +8,9 @@
     body {
       font-family: monospace;
       background-color: #000;
-      color: #FFF;
+      color: #00ffff;
       margin: 0;
       padding: 0;
-      overflow: hidden;
     }
     header {
       display: flex;
@@ -24,6 +23,7 @@
     header h1 {
       font-size: 18px;
       margin: 0;
+      color: #00ffff;
     }
     .nav {
       display: flex;
@@ -31,8 +31,8 @@
     }
     .nav button {
       background: none;
-      color: #FFF;
-      border: 1px solid #FFF;
+      color: #00ffff;
+      border: 1px solid #00ffff;
       padding: 5px 15px;
       font-size: 14px;
       cursor: pointer;
@@ -44,20 +44,37 @@
       white-space: pre;
       text-align: center;
       margin: 40px auto;
-      color: #FFF;
+      color: #00ffff;
       max-width: 600px;
     }
-    .ascii-art.moving {
-      position: absolute;
-      animation: float 5s infinite alternate;
+    .ascii-pattern {
+      display: grid;
+      grid-template-columns: repeat(6, auto);
+      gap: 10px;
+      text-align: center;
+      margin: 20px auto;
     }
-    @keyframes float {
-      0% {
-        transform: translate(0, 0);
+    .cat {
+      display: block;
+      animation: blink 2s infinite;
+      font-size: 16px;
+    }
+    @keyframes blink {
+      0%, 90%, 100% {
+        content: "/\\_/\\\n( o o )";
       }
-      100% {
-        transform: translate(30px, 30px);
+      45%, 55% {
+        content: "/\\_/\\\n( - - )";
       }
+    }
+    .cat::before {
+      display: block;
+      content: "/\\_/\\";
+    }
+    .cat::after {
+      display: block;
+      content: "( o o )";
+      animation: blink 2s infinite;
     }
   </style>
 </head>
@@ -89,23 +106,20 @@
     </pre>
   </div>
 
-  <!-- Moving ASCII Designs -->
-  <div class="ascii-art moving" style="top: 100px; left: 100px;">
-    <pre>
-      0   0
-     >^_^<
-    /  |  \
-    </pre>
-  </div>
-
-  <div class="ascii-art moving" style="top: 200px; left: 300px;">
-    <pre>
-      [::::]
-     /  00  \
-    |    >    |
-    |   ---   |
-     \______/
-    </pre>
+  <!-- Pattern of Cats -->
+  <div class="ascii-pattern">
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
+    <span class="cat"></span>
   </div>
 </body>
 </html>
