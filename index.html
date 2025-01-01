@@ -8,9 +8,10 @@
     body {
       font-family: monospace;
       background-color: #000;
-      color: #00ffff;
+      color: #FFF;
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
     header {
       display: flex;
@@ -23,7 +24,6 @@
     header h1 {
       font-size: 18px;
       margin: 0;
-      color: #00ffff;
     }
     .nav {
       display: flex;
@@ -31,8 +31,8 @@
     }
     .nav button {
       background: none;
-      color: #00ffff;
-      border: 1px solid #00ffff;
+      color: #FFF;
+      border: 1px solid #FFF;
       padding: 5px 15px;
       font-size: 14px;
       cursor: pointer;
@@ -44,36 +44,31 @@
       white-space: pre;
       text-align: center;
       margin: 40px auto;
-      color: #00ffff;
+      color: #FFF;
       max-width: 600px;
     }
-    .ascii-pattern {
-      display: grid;
-      grid-template-columns: repeat(6, auto);
-      gap: 10px;
-      text-align: center;
-      margin: 20px auto;
-    }
     .cat {
-      display: block;
-      animation: blink 2s infinite;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      text-align: left;
       font-size: 16px;
+      animation: blink 2s infinite;
     }
     @keyframes blink {
       0%, 90%, 100% {
-        content: "/\\_/\\\n( o o )";
+        content: '／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ';
       }
       45%, 55% {
-        content: "/\\_/\\\n( - - )";
+        content: '／l、\A（-､ - ７\Al, ~ヽ\Aじしf_, )ノ';
       }
     }
     .cat::before {
       display: block;
-      content: "/\\_/\\";
+      content: "／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ";
+      white-space: pre;
     }
-    .cat::after {
-      display: block;
-      content: "( o o )";
+    .cat::before {
       animation: blink 2s infinite;
     }
   </style>
@@ -106,20 +101,7 @@
     </pre>
   </div>
 
-  <!-- Pattern of Cats -->
-  <div class="ascii-pattern">
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-    <span class="cat"></span>
-  </div>
+  <!-- Gato animado -->
+  <div class="cat"></div>
 </body>
 </html>
