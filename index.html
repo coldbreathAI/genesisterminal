@@ -11,6 +11,7 @@
       color: #FFF;
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
     header {
       display: flex;
@@ -39,69 +40,35 @@
     .nav button:hover {
       background-color: #222;
     }
-    .content {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #111;
-      padding: 15px;
-      border: 1px solid #FFF;
-      border-radius: 5px;
-      max-width: 300px;
-      text-align: center;
-    }
     .ascii-art {
       white-space: pre;
       text-align: center;
-      margin: 20px auto;
+      margin: 40px auto;
       color: #FFF;
       max-width: 600px;
     }
-    footer {
-      margin-top: 20px;
-      color: #888;
-      font-size: 14px;
-      text-align: center;
+    .ascii-art.moving {
+      position: absolute;
+      animation: float 5s infinite alternate;
     }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+    @keyframes float {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(30px, 30px);
+      }
     }
   </style>
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-      });
-      document.querySelector('.overlay').style.display = 'block';
-      document.getElementById(id).style.display = 'block';
-    }
-
-    function closeSections() {
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-      });
-      document.querySelector('.overlay').style.display = 'none';
-    }
-  </script>
 </head>
 <body>
-  <div class="overlay" onclick="closeSections()"></div>
-
   <header>
     <h1>Bebop AI</h1>
     <nav class="nav">
-      <button onclick="showSection('docs')">Docs 📜</button>
-      <button onclick="showSection('telegram')">Telegram ✉️</button>
-      <button onclick="showSection('twitter')">Twitter 🐦</button>
-      <button onclick="showSection('dexscreener')">Dexscreener 📊</button>
+      <button onclick="alert('Docs feature coming soon!')">Docs 📜</button>
+      <button onclick="alert('Telegram feature coming soon!')">Telegram ✉️</button>
+      <button onclick="alert('Twitter feature coming soon!')">Twitter 🐦</button>
+      <button onclick="alert('Dexscreener feature coming soon!')">Dexscreener 📊</button>
     </nav>
   </header>
 
@@ -122,26 +89,23 @@
     </pre>
   </div>
 
-  <!-- Content Sections -->
-  <div id="docs" class="content">
-    <h2>📜 Documentation</h2>
-    <p>Explore detailed guides, FAQs, and tutorials.</p>
-  </div>
-  <div id="telegram" class="content">
-    <h2>✉️ Telegram</h2>
-    <p>Join our community for live discussions and updates.</p>
-  </div>
-  <div id="twitter" class="content">
-    <h2>🐦 Twitter</h2>
-    <p>Follow us for real-time announcements and insights.</p>
-  </div>
-  <div id="dexscreener" class="content">
-    <h2>📊 Dexscreener</h2>
-    <p>Track analytics and market data in real-time.</p>
+  <!-- Moving ASCII Designs -->
+  <div class="ascii-art moving" style="top: 100px; left: 100px;">
+    <pre>
+      0   0
+     >^_^<
+    /  |  \
+    </pre>
   </div>
 
-  <footer>
-    Bebop AI © 2025 - Inspired by Creative Collaboration
-  </footer>
+  <div class="ascii-art moving" style="top: 200px; left: 300px;">
+    <pre>
+      [::::]
+     /  00  \
+    |    >    |
+    |   ---   |
+     \______/
+    </pre>
+  </div>
 </body>
 </html>
