@@ -20,15 +20,20 @@
       padding: 5px 15px;
       background-color: #111;
       border-bottom: 1px solid #444;
+      flex-wrap: wrap;
     }
     header h1 {
       font-size: 16px;
       margin: 0;
       color: #AAA;
+      flex: 1 1 auto;
     }
     .nav {
       display: flex;
-      gap: 15px;
+      gap: 10px;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      flex-wrap: wrap;
     }
     .nav button {
       background: none;
@@ -84,6 +89,26 @@
       content: "／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ";
       white-space: pre;
       animation: blink 4s infinite;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px;
+        text-align: center;
+      }
+      header h1 {
+        text-align: center;
+        flex: 1 1 100%;
+      }
+      .nav {
+        justify-content: center;
+        flex: 1 1 100%;
+      }
+      .nav button {
+        font-size: 12px;
+        padding: 5px 8px;
+      }
     }
   </style>
 </head>
