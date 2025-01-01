@@ -53,7 +53,14 @@
       right: 20px;
       text-align: left;
       font-size: 16px;
-      animation: blink 2s infinite;
+      line-height: 1.5;
+      animation: blink 4s infinite;
+    }
+    .cat .question {
+      display: block;
+      text-align: center;
+      font-size: 20px;
+      animation: bounce 2s infinite;
     }
     @keyframes blink {
       0%, 90%, 100% {
@@ -63,13 +70,21 @@
         content: '／l、\A（-､ - ７\Al, ~ヽ\Aじしf_, )ノ';
       }
     }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
     .cat::before {
       display: block;
       content: "／l、\A（ﾟ､ ｡ ７\Al, ~ヽ\Aじしf_, )ノ";
       white-space: pre;
     }
-    .cat::before {
-      animation: blink 2s infinite;
+    .cat .question::before {
+      content: "?";
     }
   </style>
 </head>
@@ -102,6 +117,12 @@
   </div>
 
   <!-- Gato animado -->
-  <div class="cat"></div>
+  <div class="cat">
+    <div class="question"></div>
+    ／l、<br>
+    （ﾟ､ ｡ ７<br>
+    l, ~ヽ<br>
+    じしf_, )ノ
+  </div>
 </body>
 </html>
